@@ -34,10 +34,26 @@ product_price = []
 product_url = []
 
 item_num = 0
-for result in result_item:
-    if item_num != num_results:
-        product_name.append(result_item[item_num]['item']['product_description']['title'])
-        item_num += 1
-    elif item_num == num_results:
-        break
-print(product_name)
+search = True
+while search == True:
+    for name in result_item:
+        if item_num != num_results:
+            product_name.append(result_item[item_num]['item']['product_description']['title'])
+            item_num += 1
+        if item_num == num_results:
+            print(product_name)
+            item_num = 0
+            for price in result_item:
+                if item_num != num_results:
+                    product_price.append(result_item[item_num]['price']['current_retail'])
+                    item_num += 1
+                if item_num == num_results:
+                    print(product_price)
+                    item_num = 0
+                    for url in result_item:
+                        if item_num != num_results:
+                            product_url.append(result_item[item_num]['item']['enrichment']['buy_url'])
+                            item_num += 1 
+                        if item_num == num_results:
+                            print(product_url)
+                            search = False
